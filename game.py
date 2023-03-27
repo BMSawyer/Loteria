@@ -93,24 +93,39 @@ myDeck= DrawDeck(card_list)
 myBoard= Board(card_list)
 myBoard.layout()
 
+won =False
+t = 1 
 
-#prompt= input("Your board has been drawn.  Type any key to draw a card from the deck")
-t = 0 
+## if you have issues with inputs from keyboard ..... then you may uncomment and use the below block for 30 turns auto)
+##              Apparently there is a known issue w bash for git in windows recognizing control returning to user) 
+# comment out this prompt:   
+# prompt= input("Your board has been drawn.  You will now draw cards from the shuffled deck until you get 4 beans across or down. Type any key to draw a card from the deck.")
+
+##uncomment this variable assignment (turns)
 turns = 30 # number of turns/ cards to draw (minus 1)
 
+##uncomment this while statement, which will replace the keyboard prompt loop
 while t < turns:
 
+
+##comment out the while statment (only the 1 line with while)
+#while won == False:
+    print ("Turn " + str(t))
+    
+## comment out the below prompt for input    
+#    prompt= input("Type any key to draw a card.")
+
     myCard= myDeck.draw()
-    print (myCard[1], myCard[2])  # Display drawn card
+    print (myCard[1]+". " + myCard[2] +".")  # Display drawn card
     if myBoard.mark(myCard) ==1000:
-        print ('Yes!')
+        print ('Yes! A bean has been placed.')
     if myBoard.calc()== True:
+        won=True
         print ("You Won")
         break
     
     print('\n')
     t+=1
-    #time.sleep(3)
-
-print (str(t) + ' turns'+ str(myDeck.card_count) + ' cards in deck.')
+    
+print (str(t) + ' turns. '+ str(myDeck.card_count) + ' cards in remaining deck.')
 
